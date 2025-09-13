@@ -3,12 +3,17 @@ import logo from "./logo.svg";
 import "./App.css";
 import request from "./utils/request";
 
+async function req() {
+  let data = await request("/post", "POST", { a: "b" });
+  alert(data.time);
+}
+
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
-      let data = await request("/post", "POST", { a: "b" });
+      let data = await request("/index");
       setCurrentTime(data.time);
     }
     fetchData();
@@ -30,6 +35,7 @@ function App() {
           Learn React
         </a>
         <p>Message {currentTime}</p>
+        <button onClick={req}>CLick me</button>
       </header>
     </div>
   );
